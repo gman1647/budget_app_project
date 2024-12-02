@@ -28,4 +28,5 @@ F C A
  g
 
 Updates:
-Added functions for deposits, withdrawal, and check_balance.
+Added functions for deposits, withdrawal, and get_balance.
+Added function for transfers between categories. All FCC tests for deposits, withdrawal, and transfers pass.

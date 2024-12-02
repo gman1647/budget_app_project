@@ -1,15 +1,16 @@
 class Category:
-    def __init__(self, category,):
+    def __init__(self, category):
         self.category = category
         self.amount = 0
         self.description = ""
         self.ledger = []
 
+    def __str__(self):
+        return f'{self.category}'
+    
     def deposit(self, amount, description = ""):
         self.ledger.append({'amount': amount, 'description': description})
 
-#{'amount': amount, 'description': description}
-# A withdraw method that is similar to the deposit method, but the amount passed in should be stored in the ledger as a negative number. If there are not enough funds, nothing should be added to the ledger. This method should return True if the withdrawal took place, and False otherwise.
     def withdraw(self, amount, description = ""):
         if amount > self.get_balance():
             return False
@@ -28,9 +29,15 @@ class Category:
         return bal
         #Could I use enumarate to do this?
 
-    
     def transfer(self, amount, other_category):
-        pass
+        if amount > self.get_balance():
+            return False
+        else:
+            description = 'Transfer to ' + other_category.category
+            self.withdraw(amount, description)
+            description = 'Transfer from ' + self.category
+            other_category.deposit(amount, description)
+            return True
     
     def check_funds(self, amount):
         pass
@@ -50,10 +57,19 @@ food.withdraw(440,"cake")
 food.withdraw(10.15, 'groceries')
 food.withdraw(15.89, 'restaurant and more food for dessert')
 clothing = Category('Clothing')
-#food.transfer(50, clothing)
 
 print(f'current pet balance is:  {pets.get_balance()}')
 print(f'current food balance is:  {food.get_balance()}')
+print(f'current clothing balance is: {clothing.get_balance()}')
+
+food.transfer(100, clothing)
+
+print(f'current food balance is:  {food.get_balance()}')
+print(f'current clothing balance is: {clothing.get_balance()}')
+
+print(f'This is the food ledger: {food.ledger}')
+print(f'This is the clothing ledger: {clothing.ledger}')
+
 
 
 
