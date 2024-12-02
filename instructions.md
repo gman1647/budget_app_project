@@ -26,7 +26,7 @@ food.transfer(50, clothing)
 print(food)
 And here is an example of the output:
 
-******\*******Food******\*******
+**\*\***\***\*\***Food**\*\***\***\*\***
 initial deposit 1000.00
 groceries -10.15
 restaurant and more foo -15.89
@@ -52,13 +52,15 @@ Percentage spent by category
  30| o  
  20| o o  
  10| o o o  
- 0| o o o  
- ----------
-F C A  
- o l u  
- o o t  
- d t o  
- h  
- i  
- n  
- g
+ 0| o o o
+
+---
+
+     F C A
+     o l u
+     o o t
+     d t o
+       h
+       i
+       n
+       g

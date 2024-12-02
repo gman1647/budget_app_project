@@ -14,8 +14,10 @@ Percentage spent by category
  30| o  
  20| o o  
  10| o o o  
- 0| o o o  
- ----------
+ 0| o o o
+
+---
+
 F C A  
  o l u  
  o o t  
@@ -24,3 +26,6 @@ F C A
  i  
  n  
  g
+
+Updates:
+Added functions for deposits, withdrawal, and check_balance.
