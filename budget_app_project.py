@@ -12,12 +12,12 @@ class Category:
         self.ledger.append({'amount': amount, 'description': description})
 
     def withdraw(self, amount, description = ""):
-        if amount > self.get_balance():
-            return False
-        else:
+        if self.check_funds(amount):
             amount = amount * -1
-            self.ledger.append({'amount': amount, 'description': description}) 
-            return True     
+            self.ledger.append({'amount': amount, 'description': description})
+            return True
+        else:
+            return False     
 
     def get_balance(self):
         bal = 0
@@ -30,18 +30,19 @@ class Category:
         #Could I use enumarate to do this?
 
     def transfer(self, amount, other_category):
-        if amount > self.get_balance():
-            return False
-        else:
+        if self.check_funds(amount):
             description = 'Transfer to ' + other_category.category
             self.withdraw(amount, description)
             description = 'Transfer from ' + self.category
             other_category.deposit(amount, description)
             return True
-    
+        else: return False
+    # A check_funds method that accepts an amount as an argument. It returns False if the amount is greater than the balance of the budget category and returns True otherwise. This method should be used by both the withdraw method and transfer method.
     def check_funds(self, amount):
-        pass
-
+        if amount > self.get_balance():
+            return False
+        else:
+            return True
 
 def create_spend_chart(categories):
     pass

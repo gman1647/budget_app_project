@@ -30,3 +30,4 @@ F C A
 Updates:
 Added functions for deposits, withdrawal, and get_balance.
 Added function for transfers between categories. All FCC tests for deposits, withdrawal, and transfers pass.
+Added check balance function (I should have finished this function before the withdrawal and deposit functions, but whatever). All the budget functions now work. Now I just need to work on how the instances and the overall budget print to the console. That will be for tomorrow.
