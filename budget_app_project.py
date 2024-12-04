@@ -74,8 +74,44 @@ class Category:
         
         return f'{title}\n{ret_string}{total}'
 
+# takes a list of categories as an argument. It should return a string that is a bar chart.
+
+# The chart should show the percentage spent in each category passed in to the function. The percentage spent should be calculated only with withdrawals and not with deposits. Down the left side of the chart should be labels 0 - 100. The 'bars' in the bar chart should be made out of the 'o' character. The height of each bar should be rounded down to the nearest 10. The horizontal line below the bars should go two spaces past the final bar. Each category name should be written vertically below the bar. There should be a title at the top that says 'Percentage spent by category'.
+
+# This function will be tested with up to four categories.
+
+# Look at the example output below very closely and make sure the spacing of the output matches the example exactly.
+
+#FCC Forum seems to think this is a percentage of the total expendature
 def create_spend_chart(categories):
-    pass
+    print(f'\nPercentage Spent per Category')
+    total = _get_total(categories)
+    cat_totals = []
+    i = 0
+    while i < len(categories):
+        cat_totals.append(round(_get_cat_total(categories[i])/total,1))
+        print(cat_totals)
+        i += 1
+
+
+def _get_cat_total(category):
+    spending_sum = 0
+    i = 0
+    while i < len(category.ledger):
+        if category.ledger[i]['amount'] < 0:
+            spending_sum = spending_sum + round(category.ledger[i]['amount'],2)
+            i += 1
+        else:
+            i +=1
+    return round(spending_sum,2)
+
+def _get_total(categories):
+    total = 0
+    i = 0
+    while i < len(categories):
+        total = total + _get_cat_total(categories[i])
+        i += 1
+    return round(total,2)
 
 pets = Category("Pets")
 food = Category("Food")
@@ -102,7 +138,13 @@ food.transfer(100, clothing)
 # print(f'This is the food ledger: {food.ledger}')
 # print(f'This is the clothing ledger: {clothing.ledger}')
 
-print(food)
-print(clothing)
-print(pets)
+# print(food)
+# print(clothing)
+# print(pets)
 
+# print(_get_total(food))
+# print(_get_total(pets))
+# print(_get_total(clothing))
+
+the_list = (food, pets, clothing)
+create_spend_chart(the_list)
