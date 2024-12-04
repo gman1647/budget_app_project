@@ -44,13 +44,86 @@ class Category:
         else:
             return True
 
+    def print_category(self):
+        stars = (30 - len(self.category)) // 2
+        star_line = ""
+        i = 0
+        while i < stars:
+            star_line = star_line + "*"
+            i += 1
+        if len(f'{star_line}{self}{star_line}') != 30:
+            print(f'{star_line}{self}{star_line}*')
+
+        else:
+            print(f'{star_line}{self}{star_line}')
+        # for index in self.ledger:
+            spaces = ""
+            # j = 
+            # while j < 30:
+            #     spaces = spaces + " "
+            #     j += 1
+        print(f'{self.ledger[0]["description"][:23]}{spaces}{self.ledger[0]["amount"]:.2f}')
+
+
 def create_spend_chart(categories):
     pass
+
+# A title line of 30 characters where the name of the category is centered in a line of \* characters.
+# A list of the items in the ledger. Each line should show the description and amount. The first 23 characters of the description should be displayed, then the amount. The amount should be right aligned, contain two decimal places, and display a maximum of 7 characters.
+# A line displaying the category total.
+
+# Here is an example of the output:
+
+# *************Food*************
+# initial deposit 1000.00
+# groceries -10.15
+# restaurant and more foo -15.89
+# Transfer to Clothing -50.00
+# Total: 923.96
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 pets = Category("Pets")
 food = Category("Food")
 
-pets.deposit(1000,"initial deposit")
+pets.deposit(1000.01,"initial deposit")
 pets.withdraw(10,"dog food")
 pets.withdraw(58,"cat litter")
 food.deposit(400,"initial deposit")
@@ -70,7 +143,8 @@ print(f'current clothing balance is: {clothing.get_balance()}')
 
 print(f'This is the food ledger: {food.ledger}')
 print(f'This is the clothing ledger: {clothing.ledger}')
-
+pets.print_category()
+clothing.print_category()
 
 
 
