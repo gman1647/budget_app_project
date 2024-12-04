@@ -56,13 +56,18 @@ class Category:
 
         else:
             print(f'{star_line}{self}{star_line}')
-        # for index in self.ledger:
-            spaces = ""
+        
+        for index in range(len(self.ledger)):
+            # for key in self.ledger[index]:
+
+            print(f'{self.ledger[index]["description"][:23]}{self.ledger[index]["amount"]:.2f}')
+            # spaces = ""
             # j = 
             # while j < 30:
             #     spaces = spaces + " "
             #     j += 1
-        print(f'{self.ledger[0]["description"][:23]}{spaces}{self.ledger[0]["amount"]:.2f}')
+        
+        # print(f'{self.ledger[0]["description"][:23]}{self.ledger[0]["amount"]:.2f}')
 
 
 def create_spend_chart(categories):
