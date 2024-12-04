@@ -34,3 +34,5 @@ Added function for transfers between categories. All FCC tests for deposits, wit
 Added check balance function (I should have finished this function before the withdrawal and deposit functions, but whatever). All the budget functions now work. Now I just need to work on how the instances and the overall budget print to the console. That will be for tomorrow.
 I took a couple of days off to work on some VBA for work, but back to it today
 Added `print_category` which correctly prints each category to the console. All tests pass except the bar chart which I will begin work on now.
+Added `create_spend_chart` function along with helper functions `_get_cat_total` and `_get_total`. Together, these calculate the percentage of spending for each category.
+The math appears to work, not on to the visual.
