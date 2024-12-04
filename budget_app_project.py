@@ -59,8 +59,14 @@ class Category:
         
         for index in range(len(self.ledger)):
             # for key in self.ledger[index]:
+            skippy = len(f'{self.ledger[index]["description"][:23]}{self.ledger[index]["amount"]:.2f}')
+            spaces = ""
+            x = 0
+            while x < 30 - skippy:
+                spaces = spaces + " "
+                x += 1
 
-            print(f'{self.ledger[index]["description"][:23]}{self.ledger[index]["amount"]:.2f}')
+            print(f'{self.ledger[index]["description"][:23]}{spaces}{self.ledger[index]["amount"]:.2f}')
             # spaces = ""
             # j = 
             # while j < 30:
