@@ -26,8 +26,11 @@ F C A
  i  
  n  
  g
+^prettier keeps messing this up
 
 Updates:
 Added functions for deposits, withdrawal, and get_balance.
 Added function for transfers between categories. All FCC tests for deposits, withdrawal, and transfers pass.
 Added check balance function (I should have finished this function before the withdrawal and deposit functions, but whatever). All the budget functions now work. Now I just need to work on how the instances and the overall budget print to the console. That will be for tomorrow.
+I took a couple of days off to work on some VBA for work, but back to it today
+Added `print_category` which correctly prints each category to the console. All tests pass except the bar chart which I will begin work on now.
