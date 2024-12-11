@@ -89,10 +89,36 @@ def create_spend_chart(categories):
     cat_totals = []
     i = 0
     while i < len(categories):
-        cat_totals.append(round(_get_cat_total(categories[i])/total,1))
-        print(cat_totals)
+        cat_totals.append((categories[i].category, _make_circles(round(_get_cat_total(categories[i])/total,1))))
         i += 1
+    # print(cat_totals)
+    # print(cat_totals[0][1][10])
+    sa = []
+    ss = " "
+    j = 0
+    while j <= 10:
+        for item in cat_totals:
+            ss = ss + item[1][j] + " "
+        sa.append(ss)
+        ss = " "
+        j += 1
 
+    # item_test = cat_totals[0]
+    # item_test2 = cat_totals[1]
+    # print(item_test)
+    # name_test = item_test[0]
+    # name_test2 = item_test2[0]
+    # print(name_test)
+    # circle_number = item_test[1] * 10
+    # print(int(circle_number))
+    # circle = "O"
+    # i=0
+    # while i < int(circle_number):
+    #     circle = circle + "O"
+    #     i += 1
+    # print(circle)
+    print(f'Chart\n100| {sa[0]}\n 90|{sa[1]}\n 80|{sa[2]}\n 70|{sa[3]}\n 60|{sa[4]}\n 50|{sa[5]}\n 40|{sa[6]}\n 30|{sa[7]}\n 20|{sa[9]}\n 10|{sa[10]}\n  0|{sa[10]}\n----------\n')
+    # {name_test[0]}   {name_test2[0]}\n     {name_test[1]}   {name_test2[1]}\n     {name_test[2]}   {name_test2[2]}\n     {name_test[3]}   {name_test2[3]}')
 
 def _get_cat_total(category):
     spending_sum = 0
@@ -104,6 +130,18 @@ def _get_cat_total(category):
         else:
             i +=1
     return round(spending_sum,2)
+
+def _make_circles(percent):
+    circle_number = percent
+    circle = ""
+    i = 1
+    while i > 0:
+        if i > circle_number:
+            circle = circle + " "
+        else:
+            circle = circle + "o"
+        i -= .1
+    return circle
 
 def _get_total(categories):
     total = 0
@@ -124,7 +162,9 @@ food.deposit(400,"initial deposit")
 food.withdraw(440,"cake")
 food.withdraw(10.15, 'groceries')
 food.withdraw(15.89, 'restaurant and more food for dessert')
-
+clothing.deposit(150, "initial deposit")
+clothing.withdraw(75.00, 'shirt')
+clothing.withdraw(20.25, 'pants')
 
 # print(f'current pet balance is:  {pets.get_balance()}')
 # print(f'current food balance is:  {food.get_balance()}')

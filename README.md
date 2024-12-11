@@ -36,3 +36,7 @@ I took a couple of days off to work on some VBA for work, but back to it today
 Added `print_category` which correctly prints each category to the console. All tests pass except the bar chart which I will begin work on now.
 Added `create_spend_chart` function along with helper functions `_get_cat_total` and `_get_total`. Together, these calculate the percentage of spending for each category.
 The math appears to work, not on to the visual.
+
+Started on the visual. The top portion mostly works, but it's a bit hacky. It also has a couple of items that need to be fixed, namely:
+Add an extra line to he percentage markers to account for the "0%" in the required output
+Draw the sumline based on the width of the graph
