@@ -38,5 +38,42 @@ Added `create_spend_chart` function along with helper functions `_get_cat_total`
 The math appears to work, not on to the visual.
 
 Started on the visual. The top portion mostly works, but it's a bit hacky. It also has a couple of items that need to be fixed, namely:
-Add an extra line to he percentage markers to account for the "0%" in the required output
-Draw the sumline based on the width of the graph
+complete-Add an extra line to he percentage markers to account for the "0%" in the required output
+complete-Draw the sumline based on the width of the graph
+
+Sumline added
+Category names added
+One math error seems to remain. I believe it is related to how FCC expects the category graph to round. Will fix it once I get an answer on what it expects. Once that is sqashed, this app is done.
+
+This is the current output:
+
+**\*\*\*\*** Automobile****\*\*****
+initial deposit 1200.00
+car payment -75.54
+gas -47.83
+Transfer to Food -50.50
+Total: 1026.13
+
+Percentage Spent per Category
+100|  
+ 90|  
+ 80|  
+ 70|  
+ 60|  
+ 50|  
+ 40|  
+ 30| o  
+ 20| o o  
+ 10| o o o  
+ 0| o o o o  
+ ------------
+F P C A  
+ o e l u  
+ o t o t  
+ d s t o  
+ h m  
+ i o  
+ n b  
+ g i  
+ l  
+ e

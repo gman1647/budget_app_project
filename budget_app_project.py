@@ -87,18 +87,19 @@ def create_spend_chart(categories):
     print(f'\nPercentage Spent per Category')
     total = _get_total(categories)
     cat_totals = []
+    sumline= _make_sum_line(categories)
     i = 0
     while i < len(categories):
         cat_totals.append((categories[i].category, _make_circles(round(_get_cat_total(categories[i])/total,1))))
         i += 1
-    # print(cat_totals)
+    names = _make_category_names(categories)# print(cat_totals)
     # print(cat_totals[0][1][10])
     sa = []
     ss = " "
     j = 0
     while j <= 10:
         for item in cat_totals:
-            ss = ss + item[1][j] + " "
+            ss = ss + item[1][j] + "  "
         sa.append(ss)
         ss = " "
         j += 1
@@ -117,7 +118,7 @@ def create_spend_chart(categories):
     #     circle = circle + "O"
     #     i += 1
     # print(circle)
-    print(f'Chart\n100| {sa[0]}\n 90|{sa[1]}\n 80|{sa[2]}\n 70|{sa[3]}\n 60|{sa[4]}\n 50|{sa[5]}\n 40|{sa[6]}\n 30|{sa[7]}\n 20|{sa[9]}\n 10|{sa[10]}\n  0|{sa[10]}\n----------\n')
+    print(f'100|{sa[0]}\n 90|{sa[1]}\n 80|{sa[2]}\n 70|{sa[3]}\n 60|{sa[4]}\n 50|{sa[5]}\n 40|{sa[6]}\n 30|{sa[7]}\n 20|{sa[8]}\n 10|{sa[9]}\n  0|{sa[10]}\n{sumline}\n{names}')
     # {name_test[0]}   {name_test2[0]}\n     {name_test[1]}   {name_test2[1]}\n     {name_test[2]}   {name_test2[2]}\n     {name_test[3]}   {name_test2[3]}')
 
 def _get_cat_total(category):
@@ -135,8 +136,8 @@ def _make_circles(percent):
     circle_number = percent
     circle = ""
     i = 1
-    while i > 0:
-        if i > circle_number:
+    while i >= 0:
+        if i >= circle_number:
             circle = circle + " "
         else:
             circle = circle + "o"
@@ -151,9 +152,47 @@ def _get_total(categories):
         i += 1
     return round(total,2)
 
+def _make_sum_line(categories):
+    sumline = "    "
+    i = 0
+    while i < len(categories):
+        sumline = sumline + "--"
+        i += 1
+    sumline = sumline + "----"
+    return sumline
+
+def _make_category_names(categories):
+    name_list = []
+    for name in categories:
+        name_list.append(name.category)
+    max_length = (len(max(name_list, key = len)))
+    test = "     "
+    out = []
+    i = 0
+    while i < max_length:
+        for name in name_list:
+            if i >= len(name):
+                test = test + "   "
+            else:
+                test = test + name[i] + "  "
+        out.append(test)
+        i += 1
+        test = "     "
+    return_string = ""
+    for index in out:
+        return_string = return_string + index + "\n"
+    return return_string
+
+
+
+
+    # print(test)
+
+
 pets = Category("Pets")
 food = Category("Food")
 clothing = Category('Clothing')
+automobile = Category('Automobile')
 
 pets.deposit(1000.01,"initial deposit")
 pets.withdraw(10,"dog food")
@@ -165,6 +204,10 @@ food.withdraw(15.89, 'restaurant and more food for dessert')
 clothing.deposit(150, "initial deposit")
 clothing.withdraw(75.00, 'shirt')
 clothing.withdraw(20.25, 'pants')
+automobile.deposit(1200, "initial deposit")
+automobile.withdraw(75.54, 'car payment')
+automobile.withdraw(47.83, 'gas')
+automobile.transfer(50.50, food)
 
 # print(f'current pet balance is:  {pets.get_balance()}')
 # print(f'current food balance is:  {food.get_balance()}')
@@ -185,6 +228,9 @@ food.transfer(100, clothing)
 # print(_get_total(food))
 # print(_get_total(pets))
 # print(_get_total(clothing))
+print(automobile)
 
-the_list = (food, pets, clothing)
+the_list = (food, pets, clothing, automobile)
 create_spend_chart(the_list)
+
+# _make_category_names(the_list)
