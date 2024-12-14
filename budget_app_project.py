@@ -84,7 +84,7 @@ class Category:
 
 #FCC Forum seems to think this is a percentage of the total expendature
 def create_spend_chart(categories):
-    print(f'\nPercentage Spent per Category')
+    print(f'Percentage Spent per Category')
     total = _get_total(categories)
     cat_totals = []
     sumline= _make_sum_line(categories)
@@ -92,6 +92,7 @@ def create_spend_chart(categories):
     while i < len(categories):
         cat_totals.append((categories[i].category, _make_circles(round(_get_cat_total(categories[i])/total,1))))
         i += 1
+        # print(cat_totals)
     names = _make_category_names(categories)# print(cat_totals)
     # print(cat_totals[0][1][10])
     sa = []
@@ -103,6 +104,7 @@ def create_spend_chart(categories):
         sa.append(ss)
         ss = " "
         j += 1
+        # print(j)
 
     # item_test = cat_totals[0]
     # item_test2 = cat_totals[1]
@@ -118,7 +120,7 @@ def create_spend_chart(categories):
     #     circle = circle + "O"
     #     i += 1
     # print(circle)
-    print(f'100|{sa[0]}\n 90|{sa[1]}\n 80|{sa[2]}\n 70|{sa[3]}\n 60|{sa[4]}\n 50|{sa[5]}\n 40|{sa[6]}\n 30|{sa[7]}\n 20|{sa[8]}\n 10|{sa[9]}\n  0|{sa[10]}\n{sumline}\n{names}')
+    return(f'100|{sa[0]}\n 90|{sa[1]}\n 80|{sa[2]}\n 70|{sa[3]}\n 60|{sa[4]}\n 50|{sa[5]}\n 40|{sa[6]}\n 30|{sa[7]}\n 20|{sa[8]}\n 10|{sa[9]}\n  0|{sa[10]}\n{sumline}\n{names}')
     # {name_test[0]}   {name_test2[0]}\n     {name_test[1]}   {name_test2[1]}\n     {name_test[2]}   {name_test2[2]}\n     {name_test[3]}   {name_test2[3]}')
 
 def _get_cat_total(category):
@@ -133,16 +135,24 @@ def _get_cat_total(category):
     return round(spending_sum,2)
 
 def _make_circles(percent):
-    circle_number = percent
+    print(percent)
+    circle_number = percent * 10
+    print(circle_number)
     circle = ""
-    i = 1
+    i = 10
     while i >= 0:
-        if i >= circle_number:
+        # print(circle_number)
+        if i > circle_number:
+            # print("false")
             circle = circle + " "
         else:
+            # print("true")
             circle = circle + "o"
-        i -= .1
+        # print(i)
+        i -= 1
+    print(circle)
     return circle
+print(_make_circles(0.099))
 
 def _get_total(categories):
     total = 0
@@ -193,6 +203,7 @@ pets = Category("Pets")
 food = Category("Food")
 clothing = Category('Clothing')
 automobile = Category('Automobile')
+gifts = Category('Gifts')
 
 pets.deposit(1000.01,"initial deposit")
 pets.withdraw(10,"dog food")
@@ -228,9 +239,9 @@ food.transfer(100, clothing)
 # print(_get_total(food))
 # print(_get_total(pets))
 # print(_get_total(clothing))
-print(automobile)
+# print(automobile)
 
-the_list = (food, pets, clothing, automobile)
-create_spend_chart(the_list)
+the_list = (food, pets, clothing, automobile, gifts)
+print(create_spend_chart(the_list))
 
 # _make_category_names(the_list)
