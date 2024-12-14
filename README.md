@@ -45,35 +45,4 @@ Sumline added
 Category names added
 One math error seems to remain. I believe it is related to how FCC expects the category graph to round. Will fix it once I get an answer on what it expects. Once that is sqashed, this app is done.
 
-This is the current output:
-
-**\*\*\*\*** Automobile****\*\*****
-initial deposit 1200.00
-car payment -75.54
-gas -47.83
-Transfer to Food -50.50
-Total: 1026.13
-
-Percentage Spent per Category
-100|  
- 90|  
- 80|  
- 70|  
- 60|  
- 50|  
- 40|  
- 30| o  
- 20| o o  
- 10| o o o  
- 0| o o o o  
- ------------
-F P C A  
- o e l u  
- o t o t  
- d s t o  
- h m  
- i o  
- n b  
- g i  
- l  
- e
+Solved the graph error. There is one error that still causes the test not to pass (I think it is an extra and or missing space). Everything else works. The graph was off slightly b/c I rounded to 1 rather than 2 decimal places when determining if a circle would be drawn. Almost done.

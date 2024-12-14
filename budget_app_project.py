@@ -90,7 +90,10 @@ def create_spend_chart(categories):
     sumline= _make_sum_line(categories)
     i = 0
     while i < len(categories):
-        cat_totals.append((categories[i].category, _make_circles(round(_get_cat_total(categories[i])/total,1))))
+        # print(categories[i])
+        # print(f"Without Round: {_make_circles(round(_get_cat_total(categories[i])/total,2))}")
+    
+        cat_totals.append((categories[i].category, _make_circles(round(_get_cat_total(categories[i])/total,2))))
         i += 1
         # print(cat_totals)
     names = _make_category_names(categories)# print(cat_totals)
@@ -98,9 +101,11 @@ def create_spend_chart(categories):
     sa = []
     ss = " "
     j = 0
+    # print(cat_totals)
     while j <= 10:
         for item in cat_totals:
             ss = ss + item[1][j] + "  "
+            # print(f"SS = {ss}")
         sa.append(ss)
         ss = " "
         j += 1
@@ -135,9 +140,9 @@ def _get_cat_total(category):
     return round(spending_sum,2)
 
 def _make_circles(percent):
-    print(percent)
+    # print(percent)
     circle_number = percent * 10
-    print(circle_number)
+    # print(circle_number)
     circle = ""
     i = 10
     while i >= 0:
@@ -150,9 +155,9 @@ def _make_circles(percent):
             circle = circle + "o"
         # print(i)
         i -= 1
-    print(circle)
+    # print(circle)
     return circle
-print(_make_circles(0.099))
+# print(_make_circles(0.099))
 
 def _get_total(categories):
     total = 0
@@ -199,32 +204,32 @@ def _make_category_names(categories):
     # print(test)
 
 
-pets = Category("Pets")
-food = Category("Food")
-clothing = Category('Clothing')
-automobile = Category('Automobile')
-gifts = Category('Gifts')
+# pets = Category("Pets")
+# food = Category("Food")
+# clothing = Category('Clothing')
+# automobile = Category('Automobile')
+# gifts = Category('Gifts')
 
-pets.deposit(1000.01,"initial deposit")
-pets.withdraw(10,"dog food")
-pets.withdraw(58,"cat litter")
-food.deposit(400,"initial deposit")
-food.withdraw(440,"cake")
-food.withdraw(10.15, 'groceries')
-food.withdraw(15.89, 'restaurant and more food for dessert')
-clothing.deposit(150, "initial deposit")
-clothing.withdraw(75.00, 'shirt')
-clothing.withdraw(20.25, 'pants')
-automobile.deposit(1200, "initial deposit")
-automobile.withdraw(75.54, 'car payment')
-automobile.withdraw(47.83, 'gas')
-automobile.transfer(50.50, food)
+# pets.deposit(1000.01,"initial deposit")
+# pets.withdraw(10,"dog food")
+# pets.withdraw(58,"cat litter")
+# food.deposit(400,"initial deposit")
+# food.withdraw(440,"cake")
+# food.withdraw(10.15, 'groceries')
+# food.withdraw(15.89, 'restaurant and more food for dessert')
+# clothing.deposit(150, "initial deposit")
+# clothing.withdraw(75.00, 'shirt')
+# clothing.withdraw(20.25, 'pants')
+# automobile.deposit(1200, "initial deposit")
+# automobile.withdraw(75.54, 'car payment')
+# automobile.withdraw(47.83, 'gas')
+# automobile.transfer(50.50, food)
 
 # print(f'current pet balance is:  {pets.get_balance()}')
 # print(f'current food balance is:  {food.get_balance()}')
 # print(f'current clothing balance is: {clothing.get_balance()}')
 
-food.transfer(100, clothing)
+# food.transfer(100, clothing)
 
 # print(f'current food balance is:  {food.get_balance()}')
 # print(f'current clothing balance is: {clothing.get_balance()}')
@@ -241,7 +246,25 @@ food.transfer(100, clothing)
 # print(_get_total(clothing))
 # print(automobile)
 
-the_list = (food, pets, clothing, automobile, gifts)
-print(create_spend_chart(the_list))
+# the_list = (food, pets, clothing, automobile, gifts)
+# print(create_spend_chart(the_list))
 
 # _make_category_names(the_list)
+
+food = Category("Food")
+entertainment = Category("Entertainment")
+business = Category("Business")
+food.deposit(900, "deposit")
+entertainment.deposit(900, "deposit")
+business.deposit(900, "deposit")
+food.withdraw(105.55)
+entertainment.withdraw(33.40)
+business.withdraw(10.99)
+listed = [business, food, entertainment]
+print(create_spend_chart(listed))
+
+# total = 105.55+33.40+10.99
+# bus_percent = 10.99/total
+# print(bus_percent)
+
+# print(_make_circles(.073))
