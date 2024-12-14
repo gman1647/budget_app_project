@@ -84,7 +84,6 @@ class Category:
 
 #FCC Forum seems to think this is a percentage of the total expendature
 def create_spend_chart(categories):
-    print(f'Percentage Spent per Category')
     total = _get_total(categories)
     cat_totals = []
     sumline= _make_sum_line(categories)
@@ -125,7 +124,7 @@ def create_spend_chart(categories):
     #     circle = circle + "O"
     #     i += 1
     # print(circle)
-    return(f'100|{sa[0]}\n 90|{sa[1]}\n 80|{sa[2]}\n 70|{sa[3]}\n 60|{sa[4]}\n 50|{sa[5]}\n 40|{sa[6]}\n 30|{sa[7]}\n 20|{sa[8]}\n 10|{sa[9]}\n  0|{sa[10]}\n{sumline}\n{names}')
+    return(f'Percentage spent by category\n100|{sa[0]}\n 90|{sa[1]}\n 80|{sa[2]}\n 70|{sa[3]}\n 60|{sa[4]}\n 50|{sa[5]}\n 40|{sa[6]}\n 30|{sa[7]}\n 20|{sa[8]}\n 10|{sa[9]}\n  0|{sa[10]}\n{sumline}\n{names}')
     # {name_test[0]}   {name_test2[0]}\n     {name_test[1]}   {name_test2[1]}\n     {name_test[2]}   {name_test2[2]}\n     {name_test[3]}   {name_test2[3]}')
 
 def _get_cat_total(category):
@@ -194,8 +193,16 @@ def _make_category_names(categories):
         i += 1
         test = "     "
     return_string = ""
-    for index in out:
-        return_string = return_string + index + "\n"
+    # print(out)
+    for num, index in enumerate(out):
+        # print(f'index: {index}')
+        # print(f'num: {num}')
+        if num == len(out)-1:
+            # print("boink")
+            return_string = return_string + index
+        else:
+            return_string = return_string + index + "\n"
+        # print(return_string)
     return return_string
 
 
@@ -204,32 +211,34 @@ def _make_category_names(categories):
     # print(test)
 
 
-# pets = Category("Pets")
-# food = Category("Food")
-# clothing = Category('Clothing')
-# automobile = Category('Automobile')
-# gifts = Category('Gifts')
+pets = Category("Pets")
+food = Category("Food")
+clothing = Category('Clothing')
+automobile = Category('Automobile')
+gifts = Category('Gifts')
+business = Category('Business')
+entertainment = Category('Entertainment')
 
-# pets.deposit(1000.01,"initial deposit")
-# pets.withdraw(10,"dog food")
-# pets.withdraw(58,"cat litter")
-# food.deposit(400,"initial deposit")
-# food.withdraw(440,"cake")
-# food.withdraw(10.15, 'groceries')
-# food.withdraw(15.89, 'restaurant and more food for dessert')
-# clothing.deposit(150, "initial deposit")
-# clothing.withdraw(75.00, 'shirt')
-# clothing.withdraw(20.25, 'pants')
-# automobile.deposit(1200, "initial deposit")
-# automobile.withdraw(75.54, 'car payment')
-# automobile.withdraw(47.83, 'gas')
-# automobile.transfer(50.50, food)
+pets.deposit(1000.01,"initial deposit")
+pets.withdraw(10,"dog food")
+pets.withdraw(58,"cat litter")
+food.deposit(400,"initial deposit")
+food.withdraw(440,"cake")
+food.withdraw(10.15, 'groceries')
+food.withdraw(15.89, 'restaurant and more food for dessert')
+clothing.deposit(150, "initial deposit")
+clothing.withdraw(75.00, 'shirt')
+clothing.withdraw(20.25, 'pants')
+automobile.deposit(1200, "initial deposit")
+automobile.withdraw(75.54, 'car payment')
+automobile.withdraw(47.83, 'gas')
+automobile.transfer(50.50, food)
 
 # print(f'current pet balance is:  {pets.get_balance()}')
 # print(f'current food balance is:  {food.get_balance()}')
 # print(f'current clothing balance is: {clothing.get_balance()}')
 
-# food.transfer(100, clothing)
+food.transfer(100, clothing)
 
 # print(f'current food balance is:  {food.get_balance()}')
 # print(f'current clothing balance is: {clothing.get_balance()}')
@@ -246,25 +255,27 @@ def _make_category_names(categories):
 # print(_get_total(clothing))
 # print(automobile)
 
-# the_list = (food, pets, clothing, automobile, gifts)
-# print(create_spend_chart(the_list))
+
 
 # _make_category_names(the_list)
 
-food = Category("Food")
-entertainment = Category("Entertainment")
-business = Category("Business")
+# food = Category("Food")
+# entertainment = Category("Entertainment")
+# business = Category("Business")
 food.deposit(900, "deposit")
 entertainment.deposit(900, "deposit")
 business.deposit(900, "deposit")
 food.withdraw(105.55)
 entertainment.withdraw(33.40)
 business.withdraw(10.99)
-listed = [business, food, entertainment]
-print(create_spend_chart(listed))
+# listed = [business, food, entertainment]
+# print(create_spend_chart(listed))
 
 # total = 105.55+33.40+10.99
 # bus_percent = 10.99/total
 # print(bus_percent)
 
 # print(_make_circles(.073))
+
+the_list = (food, pets, clothing, automobile, gifts, business, entertainment)
+print(create_spend_chart(the_list))
