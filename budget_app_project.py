@@ -1,3 +1,4 @@
+#Creates the budget category class and class methods
 class Category:
     def __init__(self, category):
         self.category = category
@@ -5,16 +6,14 @@ class Category:
         self.description = ""
         self.ledger = []
 
+    #When printing the category, prints the list of category transactions.
     def __str__(self):
-        #return f'{self.category}'
-        # category = self.category
-        # print(category)
         return f'{self.print_category(self.category)}'
 
-    
+    #Adds ledger entry for deposit with amount and optional description
     def deposit(self, amount, description = ""):
         self.ledger.append({'amount': amount, 'description': description})
-
+    #Adds ledger entry for withdrawal with amount and optional description
     def withdraw(self, amount, description = ""):
         if self.check_funds(amount):
             amount = amount * -1
@@ -22,7 +21,7 @@ class Category:
             return True
         else:
             return False     
-
+    #Returns current balance of category.
     def get_balance(self):
         bal = 0
         i = 0
@@ -31,8 +30,7 @@ class Category:
             bal = bal + amount
             i += 1
         return bal
-        #Could I use enumarate to do this?
-
+    #Adds ledger entry for each category with deposit/withdrawal amount and description of where the transfer came from/to
     def transfer(self, amount, other_category):
         if self.check_funds(amount):
             description = 'Transfer to ' + other_category.category
@@ -41,13 +39,13 @@ class Category:
             other_category.deposit(amount, description)
             return True
         else: return False
-    # A check_funds method that accepts an amount as an argument. It returns False if the amount is greater than the balance of the budget category and returns True otherwise. This method should be used by both the withdraw method and transfer method.
+    # Accepts an amount as an argument to see if there are sufficient funds for a transaction
     def check_funds(self, amount):
         if amount > self.get_balance():
             return False
         else:
             return True
-
+    #creates a list of the transactions in the category beneath the category name with asterisks filling up to 30 total characters and the category's current balance
     def print_category(self, name):
         stars = (30 - len(self.category)) // 2
         star_line = ""
@@ -63,70 +61,40 @@ class Category:
             title = f'{star_line}{name}{star_line}'
         ret_string = ""
         for index in range(len(self.ledger)):
-            skippy = len(f'{self.ledger[index]["description"][:23]}{self.ledger[index]["amount"]:.2f}')
+            size = len(f'{self.ledger[index]["description"][:23]}{self.ledger[index]["amount"]:.2f}')
             spaces = ""
             x = 0
-            while x < 30 - skippy:
+            while x < 30 - size:
                 spaces = spaces + " "
                 x += 1
             ret_string = ret_string + f'{self.ledger[index]["description"][:23]}{spaces}{self.ledger[index]["amount"]:.2f}\n'   
         total = f'Total: {self.get_balance():.2f}'
-        
         return f'{title}\n{ret_string}{total}'
 
-# takes a list of categories as an argument. It should return a string that is a bar chart.
-
-# The chart should show the percentage spent in each category passed in to the function. The percentage spent should be calculated only with withdrawals and not with deposits. Down the left side of the chart should be labels 0 - 100. The 'bars' in the bar chart should be made out of the 'o' character. The height of each bar should be rounded down to the nearest 10. The horizontal line below the bars should go two spaces past the final bar. Each category name should be written vertically below the bar. There should be a title at the top that says 'Percentage spent by category'.
-
-# This function will be tested with up to four categories.
-
-# Look at the example output below very closely and make sure the spacing of the output matches the example exactly.
-
-#FCC Forum seems to think this is a percentage of the total expendature
+#Creates a chart to show the distribution of spending as a percentage of total spent
 def create_spend_chart(categories):
     total = _get_total(categories)
     cat_totals = []
     sumline= _make_sum_line(categories)
     i = 0
+    #creates a tuple of the category name and a string of os with each o representing 10% of total spending rounded down to the nearest 10%.
     while i < len(categories):
-        # print(categories[i])
-        # print(f"Without Round: {_make_circles(round(_get_cat_total(categories[i])/total,2))}")
-    
         cat_totals.append((categories[i].category, _make_circles(round(_get_cat_total(categories[i])/total,2))))
         i += 1
-        # print(cat_totals)
-    names = _make_category_names(categories)# print(cat_totals)
-    # print(cat_totals[0][1][10])
+    names = _make_category_names(categories)
     sa = []
     ss = " "
     j = 0
-    # print(cat_totals)
+    #iterates through each category string of " " and "o" stored in cat_totals to place create an array (sa) of strings (ss). Each item of the category strings are separated by 2 spaces. These are then used to return the graph line by line in the return statement, so sa[0] would return the first ss string containing either " " or "o" for the category followed by two spaces between each.
     while j <= 10:
         for item in cat_totals:
             ss = ss + item[1][j] + "  "
-            # print(f"SS = {ss}")
         sa.append(ss)
         ss = " "
         j += 1
-        # print(j)
-
-    # item_test = cat_totals[0]
-    # item_test2 = cat_totals[1]
-    # print(item_test)
-    # name_test = item_test[0]
-    # name_test2 = item_test2[0]
-    # print(name_test)
-    # circle_number = item_test[1] * 10
-    # print(int(circle_number))
-    # circle = "O"
-    # i=0
-    # while i < int(circle_number):
-    #     circle = circle + "O"
-    #     i += 1
-    # print(circle)
     return(f'Percentage spent by category\n100|{sa[0]}\n 90|{sa[1]}\n 80|{sa[2]}\n 70|{sa[3]}\n 60|{sa[4]}\n 50|{sa[5]}\n 40|{sa[6]}\n 30|{sa[7]}\n 20|{sa[8]}\n 10|{sa[9]}\n  0|{sa[10]}\n{sumline}\n{names}')
-    # {name_test[0]}   {name_test2[0]}\n     {name_test[1]}   {name_test2[1]}\n     {name_test[2]}   {name_test2[2]}\n     {name_test[3]}   {name_test2[3]}')
 
+#Generates a sum of all the spending transactions in a category
 def _get_cat_total(category):
     spending_sum = 0
     i = 0
@@ -138,26 +106,20 @@ def _get_cat_total(category):
             i +=1
     return round(spending_sum,2)
 
+#Generates a sting of " " and "o". Each circle represents 10% or more in spending for a category against the total spending. All categories will have a "o" for 0%, to the string is 11 characters long.
 def _make_circles(percent):
-    # print(percent)
     circle_number = percent * 10
-    # print(circle_number)
     circle = ""
     i = 10
     while i >= 0:
-        # print(circle_number)
         if i > circle_number:
-            # print("false")
             circle = circle + " "
         else:
-            # print("true")
             circle = circle + "o"
-        # print(i)
         i -= 1
-    # print(circle)
     return circle
-# print(_make_circles(0.099))
 
+#Generates a sum of all spending in all categories to be used to determin percentage of spending in each category
 def _get_total(categories):
     total = 0
     i = 0
@@ -166,15 +128,17 @@ def _get_total(categories):
         i += 1
     return round(total,2)
 
+#Generates the X-axis for the spending chart that extends two spaces past the final bar
 def _make_sum_line(categories):
-    sumline = "    "
-    i = 0
-    while i < len(categories):
-        sumline = sumline + "--"
+    sumline = "    -"
+    i = 1
+    while i <= len(categories):
+        sumline = sumline + "---"
         i += 1
-    sumline = sumline + "----"
+    sumline = sumline + ""
     return sumline
 
+#Similar to the impletmentation of the circles above. Iterates over each name and adds the letter at the current index to a string. The string will print the category names vertically with two spaces between each letter. The string does not have an enter at the end.
 def _make_category_names(categories):
     name_list = []
     for name in categories:
@@ -193,24 +157,14 @@ def _make_category_names(categories):
         i += 1
         test = "     "
     return_string = ""
-    # print(out)
     for num, index in enumerate(out):
-        # print(f'index: {index}')
-        # print(f'num: {num}')
         if num == len(out)-1:
-            # print("boink")
             return_string = return_string + index
         else:
             return_string = return_string + index + "\n"
-        # print(return_string)
     return return_string
 
-
-
-
-    # print(test)
-
-
+#Test categories and transactions:
 pets = Category("Pets")
 food = Category("Food")
 clothing = Category('Clothing')
@@ -233,49 +187,14 @@ automobile.deposit(1200, "initial deposit")
 automobile.withdraw(75.54, 'car payment')
 automobile.withdraw(47.83, 'gas')
 automobile.transfer(50.50, food)
-
-# print(f'current pet balance is:  {pets.get_balance()}')
-# print(f'current food balance is:  {food.get_balance()}')
-# print(f'current clothing balance is: {clothing.get_balance()}')
-
 food.transfer(100, clothing)
-
-# print(f'current food balance is:  {food.get_balance()}')
-# print(f'current clothing balance is: {clothing.get_balance()}')
-
-# print(f'This is the food ledger: {food.ledger}')
-# print(f'This is the clothing ledger: {clothing.ledger}')
-
-# print(food)
-# print(clothing)
-# print(pets)
-
-# print(_get_total(food))
-# print(_get_total(pets))
-# print(_get_total(clothing))
-# print(automobile)
-
-
-
-# _make_category_names(the_list)
-
-# food = Category("Food")
-# entertainment = Category("Entertainment")
-# business = Category("Business")
 food.deposit(900, "deposit")
 entertainment.deposit(900, "deposit")
 business.deposit(900, "deposit")
 food.withdraw(105.55)
 entertainment.withdraw(33.40)
 business.withdraw(10.99)
-# listed = [business, food, entertainment]
-# print(create_spend_chart(listed))
 
-# total = 105.55+33.40+10.99
-# bus_percent = 10.99/total
-# print(bus_percent)
-
-# print(_make_circles(.073))
-
+print(food)
 the_list = (food, pets, clothing, automobile, gifts, business, entertainment)
 print(create_spend_chart(the_list))

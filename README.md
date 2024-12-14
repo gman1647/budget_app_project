@@ -46,3 +46,8 @@ Category names added
 One math error seems to remain. I believe it is related to how FCC expects the category graph to round. Will fix it once I get an answer on what it expects. Once that is sqashed, this app is done.
 
 Solved the graph error. There is one error that still causes the test not to pass (I think it is an extra and or missing space). Everything else works. The graph was off slightly b/c I rounded to 1 rather than 2 decimal places when determining if a circle would be drawn. Almost done.
+
+Project complete. The final step was removing the return at the end of the category names in the bar graph.
+
+Reflection:
+This was a fun project, even if the bar chart was rather fiddly. I'm not certain that my solution is the best or most effcient, especially how I iterated through the categories to create the chart. I feel like there may be a better way to handle that. That said, this was fun and made me think outside of the box for how I could implement the pieces needed to complete this project.
